@@ -1,0 +1,10 @@
+{
+  "experimentName": "DBpedia PerfectRef with Equations",
+  "rootPath": "/home/mistea/PhD/study/thesis/tutorials/OWL examples/SHACL/perfectRef/core/src/main/resources/dbpedia/",
+  "graphPath": "dbpedia_eurostat_union.ttl",
+  "ontologyPath": "ontology.ttl",
+  "queryPath" : "q1_popDensity.sparql",
+  "outRewrite" :"rewrite.ttl",
+  "outReportPath": "report_cities.json",
+  "outResultSet" : "result_set_cities.csv"
+}

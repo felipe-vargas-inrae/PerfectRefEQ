@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/clipper/clipper.iml" filepath="$PROJECT_DIR$/clipper/clipper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clipper/clipper-cli/clipper-cli.iml" filepath="$PROJECT_DIR$/clipper/clipper-cli/clipper-cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clipper/clipper-distribution/clipper-distribution.iml" filepath="$PROJECT_DIR$/clipper/clipper-distribution/clipper-distribution.iml" />
+    </modules>
+  </component>
+</project>

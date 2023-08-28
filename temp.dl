@@ -1,0 +1,6 @@
+d(X) :- c(X).
+r(Y,X) :- r(X,Y).
+r(X,Z) :- r(Y,Z), r(X,Y).
+a("http://ghxiao.org/inst/o1").
+% rewritten queries:
+ans(Z) :- a(Z).

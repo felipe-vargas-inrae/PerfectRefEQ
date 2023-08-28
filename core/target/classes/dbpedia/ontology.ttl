@@ -1,0 +1,107 @@
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix sh-math:     <http://www.inrae.fr/shacl-math/> .
+@prefix sosa:        <http://www.w3.org/ns/sosa/> .
+@prefix sparql:      <http://datashapes.org/sparql#> .
+@prefix time:        <http://www.w3.org/2006/time#> .
+
+@prefix dbo:         <http://dbpedia.org/ontology/> .
+@prefix dbp:         <http://dbpedia.org/property/> .
+@prefix dbr:         <http://dbpedia.org/resource/> .
+@prefix eurex:       <http://www.eurostat-example.org#> .
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wkd:         <http://www.wikidata.org/entity/> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix perRef:         <http://www.perfectref-eq.org/> .
+
+
+<http://www.eurostat-example.org>
+  rdf:type owl:Ontology .
+
+
+# <http://dbpedia.org/ontology>
+#   sh:declare [ rdf:type sh:PrefixDeclaration ;
+#                sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+#                sh:prefix "rdfs" ] ;
+#   sh:declare [ rdf:type sh:PrefixDeclaration ;
+#                sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+#                sh:prefix "xsd" ] ;
+#   sh:declare [ rdf:type sh:PrefixDeclaration ;
+#                sh:namespace "http://qudt.org/2.1/vocab/"^^xsd:anyURI ;
+#                sh:prefix "qudt" ] .
+
+# dbo:Settlement
+# # population density
+#   rdf:type sh:NodeShape, rdfs:Class ;
+#   sh:rule [ rdf:type sh-math:NodeRule ;
+#             sh:path eurostat-ex:populationDensity ;
+#             sh:values [ sparql:divide (
+#               [ sh:path dbp:populationTotal ]
+#               [ sh:path dbp:areaTotalKm ] ) ] ] ;
+
+#   sh:rule [ rdf:type sh-math:NodeRule ;
+#             sh:path eurostat-ex:populationRateFemale ;
+#             sh:values [ sparql:divide (
+#               [ sh:path eurostat-ex:populationFemale ]
+#               [ sh:path dbp:populationTotal ] ) ] ] ;
+
+#   sh:rule [ rdf:type sh-math:NodeRule ;
+#             sh:path eurostat-ex:populationRateMale ;
+#             sh:values [ sparql:divide (
+#               [ sh:path eurostat-ex:populationMale ]
+#               [ sh:path dbp:populationTotal ] ) ] ] ;
+
+# area alternatives
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:areaTotalKm ;
+  #           sh:values [ sparql:divide (
+  #             [ sh:path dbp:areaTotal ] 1000000 ) ] ] ; # avoid to compute several times populationDensity ;
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:areaTotalKm ;
+  #           sh:values [ sparql:divide (
+  #             [ sh:path dbp:areaTotalSqMi ] 2.589988110336 ) ] ] ;
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:areaTotalKm ;
+  #           sh:values [ sh:path dbp:areaKm ] ] ;
+#  sh:rule [ rdf:type sh-math:NodeRule ;
+#            sh:path dbp:areaTotalKm ;
+#            sh:values [ sparql:add (
+#              [ sh:path dbp:areaKm ] [ sh:path dbp:urbanAreaKm ]  ) ] ;
+#            sh:condition [ sh:not [ a sh:PropertyShape ;
+#                                    sh:path dbp:areaTotalKm ;
+#                                    sh:minCount 1 ; ] ] # avoid to compute several times populationDensity
+#  ] ;
+# populationTotal alternatives
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:populationTotal ;
+  #           sh:values [ sh:path dbp:urbanPop ] ; ] ;
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:populationTotal ;
+  #           sh:values [ sh:path dbp:populationUrban ] ; ] ;
+  # sh:rule [ rdf:type sh-math:NodeRule ;
+  #           sh:path dbp:populationTotal ;
+  #           sh:values [ sh:path eurostat-ex:populationTotal ] ; ] .
+
+dbo:City
+  rdfs:subClassOf dbo:Settlement .
+
+dbo:Town
+  rdfs:subClassOf dbo:Settlement .
+
+
+eurex:populationDensity perRef:definedByEquation "<http://dbpedia.org/property/populationTotal> / <http://dbpedia.org/property/areaTotalKm>".
+
+# population equations
+# dbp:populationTotal perRef:definedByEquation "<http://dbpedia.org/property/urbanPop>".
+# dbp:populationTotal perRef:definedByEquation "<http://dbpedia.org/property/populationUrban>".
+# dbp:populationTotal perRef:definedByEquation "<http://www.eurostat-example.org#populationTotal>".
+
+# area population
+# dbp:areaTotalKm perRef:definedByEquation "<http://dbpedia.org/property/areaTotal> / 1000000 ".
+# dbp:areaTotalKm perRef:definedByEquation "<http://dbpedia.org/property/areaTotalSqMi> / 2.5899 ".
+# dbp:areaTotalKm perRef:definedByEquation "<http://dbpedia.org/property/areaKm>".
+
+# --nestedANR --inferences
+# --nestedANR

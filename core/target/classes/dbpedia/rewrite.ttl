@@ -1,0 +1,39 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+SELECT ?C ?Value 
+WHERE { 
+ {
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Settlement>.
+?C <http://www.eurostat-example.org#populationDensity> ?Value.
+} 
+ UNION 
+{
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>.
+?C <http://www.eurostat-example.org#populationDensity> ?Value.
+} 
+ UNION 
+{
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Town>.
+?C <http://www.eurostat-example.org#populationDensity> ?Value.
+} 
+ UNION 
+{
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Settlement>.
+?C <http://dbpedia.org/property/populationTotal> ?z_bp4.
+?C <http://dbpedia.org/property/areaTotalKm> ?z_S41.
+BIND(xsd:double(?z_bp4) / xsd:double(?z_S41) AS ?Value)
+} 
+ UNION 
+{
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>.
+?C <http://dbpedia.org/property/populationTotal> ?z_DnE.
+?C <http://dbpedia.org/property/areaTotalKm> ?z_1vf.
+BIND(xsd:double(?z_DnE) / xsd:double(?z_1vf) AS ?Value)
+} 
+ UNION 
+{
+?C <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Town>.
+?C <http://dbpedia.org/property/populationTotal> ?z_mFy.
+?C <http://dbpedia.org/property/areaTotalKm> ?z_CRw.
+BIND(xsd:double(?z_mFy) / xsd:double(?z_CRw) AS ?Value)
+} 
+ }

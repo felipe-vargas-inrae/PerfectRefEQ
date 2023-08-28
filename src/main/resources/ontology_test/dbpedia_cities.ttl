@@ -1,0 +1,46 @@
+@prefix : <http://www.eurostat-example.org#ontEx> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix sh-math:     <http://www.inrae.fr/shacl-math/> .
+@prefix sosa:        <http://www.w3.org/ns/sosa/> .
+@prefix sparql:      <http://datashapes.org/sparql#> .
+@prefix time:        <http://www.w3.org/2006/time#> .
+
+@prefix dbo:         <http://dbpedia.org/ontology/> .
+@prefix dbp:         <http://dbpedia.org/property/> .
+@prefix dbr:         <http://dbpedia.org/resource/> .
+@prefix ex: <http://www.eurostat-example.org#> .
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wkd:         <http://www.wikidata.org/entity/> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+
+
+@base <http://www.eurostat-example.org#ontEx>.
+
+<http://www.eurostat-example.org#ontEx>
+  rdf:type owl:Ontology .
+
+
+dbo:Settlement rdf:type rdfs:Class.
+
+dbo:City rdf:type rdfs:Class;
+  rdfs:subClassOf dbo:Settlement .
+
+dbo:Town rdf:type rdfs:Class;
+  rdfs:subClassOf dbo:Settlement .
+
+
+ex:c1 a dbo:City.
+ex:c2 a dbo:Town.
+ex:c3 a dbo:Settlement.
+
+ex:c1 ex:populationTotal "30000"^^xsd:Integer.
+
+
+ex:populationTotal rdf:type owl:DatatypeProperty ;
+            rdfs:domain dbo:Settlement ;
+            rdfs:range xsd:integer;
+            rdfs:subPropertyOf dbp:populationTotal.
+
+dbp:populationTotal rdf:type owl:DatatypeProperty.

@@ -1,0 +1,12 @@
+
+
+PREFIX  xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp:         <http://dbpedia.org/property/> 
+PREFIX eurostat-ex: <http://www.eurostat-example.org#> 
+
+SELECT  ?c ?value
+WHERE {
+    ?c a dbo:Settlement.
+    ?c eurostat-ex:populationDensity ?value.
+}
